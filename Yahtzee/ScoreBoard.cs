@@ -77,7 +77,9 @@ namespace Yahtzee
         public int smallStraightScore(Dice[] calcSmallStraight)
         {
             int score = new int();
-            Array.Sort(calcSmallStraight);
+            Dice[] target = new Dice[5]; // Changed to not sort array being sent, was causing issues with dice being out of order.
+            Array.Copy(calcSmallStraight, target, 5);
+            Array.Sort(target);
             if (
                 calcSmallStraight[0] == calcSmallStraight[1] && (calcSmallStraight[4] - calcSmallStraight[3]) == 1 && (calcSmallStraight[3] - calcSmallStraight[2]) == 1 && (calcSmallStraight[2] - calcSmallStraight[1]) == 1 ||
                 calcSmallStraight[1] == calcSmallStraight[2] && (calcSmallStraight[4] - calcSmallStraight[3]) == 1 && (calcSmallStraight[3] - calcSmallStraight[1]) == 1 && (calcSmallStraight[1] - calcSmallStraight[0]) == 1 ||
@@ -97,7 +99,9 @@ namespace Yahtzee
         public int largeStraightScore(Dice[] calcLargeStraight)
         {
             int score = new int();
-            Array.Sort(calcLargeStraight);
+            Dice[] target = new Dice[5]; // Changed to not sort array being sent, was causing issues with dice being out of order.
+            Array.Copy(calcLargeStraight, target, 5);
+            Array.Sort(target);
             if (
 
                 (calcLargeStraight[4] - calcLargeStraight[3]) == 1 && (calcLargeStraight[3] - calcLargeStraight[2]) == 1 && (calcLargeStraight[2] - calcLargeStraight[1]) == 1 && (calcLargeStraight[1] - calcLargeStraight[0]) == 1

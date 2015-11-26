@@ -23,7 +23,6 @@ namespace Yahtzee
         //public const int dieSides = 6; //const
         private static readonly Random rnd = new Random();
 
-
         public Dice(int value)
         {
             diceValue = value;
@@ -112,7 +111,8 @@ namespace Yahtzee
 
         public override int GetHashCode()
         {
-            return this.diceValue.GetHashCode();
+            throw new NotSupportedException("Hash Table is not yet implemented.");
+
         }
 
         public override bool Equals(Object obj)
