@@ -65,7 +65,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="High Scores"/>
             </MenuItem>
-            <MenuItem Header="About"/>
+            <MenuItem Header="About" Click="About_Click"/>
         </Menu>
         <Label x:Name="labelUpper" Content="Upper Total:" HorizontalAlignment="Left" Margin="113,189,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
         <Label x:Name="labelUpperBonus" Content="Bonus:" HorizontalAlignment="Left" Margin="113,213,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
@@ -81,3 +81,5 @@
         </StackPanel>
     </Grid>
 </Window>
+
+    

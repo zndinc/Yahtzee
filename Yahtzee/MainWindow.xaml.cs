@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -23,11 +23,13 @@ namespace Yahtzee
     {
         private Dice[] diceArray = new Dice[5];
         ScoreBoard scr = new ScoreBoard();
+        MediaPlayer soundPlayer = new MediaPlayer();
 
         public MainWindow()
         {
             InitializeComponent();
             InitGame();
+            
         }
 
         private void updateGUI()
@@ -58,6 +60,8 @@ namespace Yahtzee
         //Button Action to roll dice
         private void buttonRollDice_Click(object sender, RoutedEventArgs e)
         {
+            soundPlayer.Open(new Uri("diceroll.mp3", UriKind.Relative));
+            soundPlayer.Play();
             for (int i = 0; i < diceArray.Length; i++)
                 diceArray[i].Roll();
             updateGUI();
@@ -114,6 +118,9 @@ namespace Yahtzee
             else labelHoldStatus5.Content = "Not Held";
         }
 
-
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Yathzee, coded by Tanner Menzel, Greg Garner, and Zach Herbert.\nDice roll sound effect recorded by Mike Koenig", "About");
+        }
     }
 }

@@ -12,3 +12,5 @@ C:\Users\Zach\Desktop\Yahtzee\Yahtzee\obj\Debug\Yahtzee.Properties.Resources.res
 C:\Users\Zach\Desktop\Yahtzee\Yahtzee\obj\Debug\Yahtzee.csproj.GenerateResource.Cache
 C:\Users\Zach\Desktop\Yahtzee\Yahtzee\obj\Debug\Yahtzee.exe
 C:\Users\Zach\Desktop\Yahtzee\Yahtzee\obj\Debug\Yahtzee.pdb
+C:\Users\Zach\Desktop\Yahtzee\Yahtzee\bin\Debug\diceroll.mp3
+C:\Users\Zach\Desktop\Yahtzee\Yahtzee\obj\Debug\Yahtzee_Content.g.cs
