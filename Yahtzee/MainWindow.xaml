@@ -1,0 +1,83 @@
+﻿<Window x:Class="Yahtzee.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Yahtzee"
+        mc:Ignorable="d"
+        Title="Yahtzee" Height="698" Width="455" ResizeMode="NoResize">
+    <Grid Background="#FFC5C5C5">
+        <Button x:Name="buttonRollDice" Content="Roll" HorizontalAlignment="Left" Margin="341,414,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="buttonRollDice_Click"/>
+        <StackPanel x:Name="stackPanelHoldButtons" HorizontalAlignment="Left" Height="30" Margin="10,628,0,0" VerticalAlignment="Top" Width="424" Orientation="Horizontal">
+            <Button x:Name="buttonHoldDice1" Content="Hold" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Padding="1" Margin="5,0,5,5" Click="buttonHoldDice1_Click" Panel.ZIndex="3"/>
+            <Button x:Name="buttonHoldDice2" Content="Hold" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Padding="1" Margin="5,0,5,5" Click="buttonHoldDice2_Click" Panel.ZIndex="3"/>
+            <Button x:Name="buttonHoldDice3" Content="Hold" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Padding="1" Margin="5,0,5,5" Click="buttonHoldDice3_Click" Panel.ZIndex="3"/>
+            <Button x:Name="buttonHoldDice4" Content="Hold" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Padding="1" Margin="5,0,5,5" Click="buttonHoldDice4_Click" Panel.ZIndex="3"/>
+            <Button x:Name="buttonHoldDice5" Content="Hold" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Padding="1" Margin="5,0,5,5" Click="buttonHoldDice5_Click" Panel.ZIndex="3"/>
+            <StackPanel Height="100"/>
+        </StackPanel>
+        <StackPanel x:Name="stackPanelUpperSection" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="186">
+            <Button x:Name="buttonAcesScore" Content="Aces (Total 1's)" Height="25"/>
+            <Button x:Name="buttonTwosScore" Content="Twos (Total 2's)" Height="25"/>
+            <Button x:Name="buttonThreesScore" Content="Threes (Total 3's)" Height="25"/>
+            <Button x:Name="buttonFoursScore" Content="Fours (Total 4's)" Height="25"/>
+            <Button x:Name="buttonFivesScore" Content="Fives (Toal 5's)" Height="25"/>
+            <Button x:Name="buttonSixesScore" Content="Sixes (Total 6's)" Height="25"/>
+        </StackPanel>
+        <StackPanel x:Name="stackPanelDice" HorizontalAlignment="Left" Height="81" Margin="10,542,0,0" VerticalAlignment="Top" Width="438" Orientation="Horizontal">
+            <Label x:Name="labelDie1" Content="Die 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Label x:Name="labelDie2" Content="Die 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Label x:Name="labelDie3" Content="Die 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Label x:Name="labelDie4" Content="Die 4" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Label x:Name="labelDie5" Content="Die 5" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+        </StackPanel>
+        <StackPanel x:Name="stackPanelLowerSection" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="186">
+            <Button x:Name="button3OfAKindScore" Content="Three of a Kind (Total Dice)" Height="25"/>
+            <Button x:Name="button4OfAKindScore" Content="Four of a Kind (Total Dice)" Height="25"/>
+            <Button x:Name="buttonFullHouseScore" Content="Full House (Score 25)" Height="25"/>
+            <Button x:Name="buttonSmallStrScore" Content="Small Straight (Score 30)" Height="25"/>
+            <Button x:Name="buttonLrgStrScore" Content="Large Straight (Score 40)" Height="25"/>
+            <Button x:Name="buttonYahtzeeScore" Content="Yahtzee (Score 50)" Height="25"/>
+            <Button x:Name="buttonChanceScore" Content="Chance (Total Dice)" Height="25"/>
+            <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25"/>
+        </StackPanel>
+        <StackPanel x:Name="stackPanelScores" HorizontalAlignment="Left" Height="463" Margin="211,39,0,0" VerticalAlignment="Top" Width="97">
+            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelTwosScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelThreesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelFoursScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelFivesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelSixesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelUpperTotal" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelUpperBonusScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="label3OfAKindScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="label4OfAKindScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelFullHouseScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelSmallStrScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelLrgStrScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelYahtzeeScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelChanceScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelYahtzeeBonusScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelLowerTotal" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
+            <Label x:Name="labelTotalScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <Menu x:Name="menu" Height="24" VerticalAlignment="Top" Width="447">
+            <MenuItem Header="File">
+                <MenuItem Header="High Scores"/>
+            </MenuItem>
+            <MenuItem Header="About"/>
+        </Menu>
+        <Label x:Name="labelUpper" Content="Upper Total:" HorizontalAlignment="Left" Margin="113,189,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        <Label x:Name="labelUpperBonus" Content="Bonus:" HorizontalAlignment="Left" Margin="113,213,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        <Label x:Name="labelLower" Content="Lower Total:" HorizontalAlignment="Left" Margin="113,439,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        <Label x:Name="labelTotal" Content="Total:" HorizontalAlignment="Left" Margin="113,465,0,0" VerticalAlignment="Top" Width="83" HorizontalContentAlignment="Right" FontWeight="Bold"/>
+        <StackPanel x:Name="stackPanelHoldStatus" HorizontalAlignment="Left" Margin="10,517,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="27">
+            <StackPanel Height="100"/>
+            <Label x:Name="labelHoldStatus1" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
+            <Label x:Name="labelHoldStatus2" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
+            <Label x:Name="labelHoldStatus3" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
+            <Label x:Name="labelHoldStatus4" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
+            <Label x:Name="labelHoldStatus5" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
+        </StackPanel>
+    </Grid>
+</Window>
