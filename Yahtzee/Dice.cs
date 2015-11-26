@@ -112,7 +112,6 @@ namespace Yahtzee
         public override int GetHashCode()
         {
             throw new NotSupportedException("Hash Table is not yet implemented.");
-
         }
 
         public override bool Equals(Object obj)

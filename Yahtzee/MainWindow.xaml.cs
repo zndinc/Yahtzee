@@ -23,13 +23,11 @@ namespace Yahtzee
     {
         private Dice[] diceArray = new Dice[5];
         ScoreBoard scr = new ScoreBoard();
-        bool isInit = false;
-
 
         public MainWindow()
         {
             InitializeComponent();
-            if (!isInit) InitGame();
+            InitGame();
         }
 
         private void updateGUI()
@@ -50,38 +48,6 @@ namespace Yahtzee
             labelDie5.Content = diceArray[4].diceValue;
         }
 
-        private void randomTesting()
-        {
-            int die1total, die2total, die3total, die4total, die5total, die6total;
-            die1total = die2total = die3total = die4total = die5total = die6total = 0;
-            Dice tester = new Dice();
-            for (int i = 0; i < 1000000; i++)
-            {
-                tester.Roll();
-                switch (tester.diceValue)
-                {
-                    case 1:
-                        die1total++;
-                        break;
-                    case 2:
-                        die2total++;
-                        break;
-                    case 3:
-                        die3total++;
-                        break;
-                    case 4:
-                        die4total++;
-                        break;
-                    case 5:
-                        die5total++;
-                        break;
-                    case 6:
-                        die6total++;
-                        break;
-                }
-            }
-            Debug.WriteLine($"{die1total}, {die2total}, {die3total}, {die4total}, {die5total}, {die6total}");
-        }
 
         private void InitGame()
         {
