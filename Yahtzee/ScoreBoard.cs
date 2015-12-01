@@ -18,6 +18,18 @@ namespace Yahtzee
             return totalDiceCount;
         }
 
+        public int dieScore(Dice[] arr, int value)
+        {
+            int number = 0;
+            foreach (Dice d in arr)
+            {
+                if (d.diceValue == value)
+                    number += d.diceValue;
+            }
+
+            return number;
+        }
+
         public int threeOfAKindScore(Dice[] calcThreeOfAKind)
         {
 
