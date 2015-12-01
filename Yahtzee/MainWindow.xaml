@@ -42,7 +42,7 @@
             <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelScores" HorizontalAlignment="Left" Height="463" Margin="211,39,0,0" VerticalAlignment="Top" Width="97">
-            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelTwosScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelThreesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelFoursScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>

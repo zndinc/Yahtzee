@@ -34,7 +34,6 @@ namespace Yahtzee
 
         private void updateGUI()
         {
-            //Need to set up calculations for the upper section
             label3OfAKindScore.Content = String.Format($"{scr.threeOfAKindScore(diceArray)}");
             label4OfAKindScore.Content = String.Format($"{scr.fourOfAKindScore(diceArray)}");
             labelFullHouseScore.Content = String.Format($"{scr.fullHouseScore(diceArray)}");
@@ -48,6 +47,13 @@ namespace Yahtzee
             labelDie3.Content = diceArray[2].diceValue;
             labelDie4.Content = diceArray[3].diceValue;
             labelDie5.Content = diceArray[4].diceValue;
+            labelAcesScore.Content = scr.dieScore(diceArray, 1);
+            labelTwosScore.Content = scr.dieScore(diceArray, 2);
+            labelThreesScore.Content = scr.dieScore(diceArray, 3);
+            labelFoursScore.Content = scr.dieScore(diceArray, 4);
+            labelFivesScore.Content = scr.dieScore(diceArray, 5);
+            labelSixesScore.Content = scr.dieScore(diceArray, 6);
+
         }
 
 
