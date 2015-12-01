@@ -31,25 +31,29 @@ namespace Yahtzee
 
         private void updateGUI()
         {
-            label3OfAKindScore.Content = String.Format($"{game.scr.threeOfAKindScore(game.diceArray)}");
-            label4OfAKindScore.Content = String.Format($"{game.scr.fourOfAKindScore(game.diceArray)}");
-            labelFullHouseScore.Content = String.Format($"{game.scr.fullHouseScore(game.diceArray)}");
-            labelSmallStrScore.Content = String.Format($"{game.scr.smallStraightScore(game.diceArray)}");
-            labelLrgStrScore.Content = String.Format($"{game.scr.largeStraightScore(game.diceArray)}");
-            labelYahtzeeScore.Content = String.Format($"{game.scr.yahtzeeScore(game.diceArray)}");
+            //Lower section
+            label3OfAKindScore.Content = game.lowerValues[0];
+            label4OfAKindScore.Content = game.lowerValues[1];
+            labelFullHouseScore.Content = game.lowerValues[2];
+            labelSmallStrScore.Content = game.lowerValues[3];
+            labelLrgStrScore.Content = game.lowerValues[4];
+            labelYahtzeeScore.Content = game.lowerValues[5];
+            labelChanceScore.Content = game.lowerValues[6];
 
-            //UpdateLabels
+            //Dice
             labelDie1.Content = game.diceArray[0].diceValue;
             labelDie2.Content = game.diceArray[1].diceValue;
             labelDie3.Content = game.diceArray[2].diceValue;
             labelDie4.Content = game.diceArray[3].diceValue;
             labelDie5.Content = game.diceArray[4].diceValue;
-            labelAcesScore.Content = game.scr.dieScore(game.diceArray, 1);
-            labelTwosScore.Content = game.scr.dieScore(game.diceArray, 2);
-            labelThreesScore.Content = game.scr.dieScore(game.diceArray, 3);
-            labelFoursScore.Content = game.scr.dieScore(game.diceArray, 4);
-            labelFivesScore.Content = game.scr.dieScore(game.diceArray, 5);
-            labelSixesScore.Content = game.scr.dieScore(game.diceArray, 6);
+
+            //Upper section - TODO: Move into gamelogic
+            labelAcesScore.Content = game.upperValues[0];
+            labelTwosScore.Content = game.upperValues[1];
+            labelThreesScore.Content = game.upperValues[2];
+            labelFoursScore.Content = game.upperValues[3];
+            labelFivesScore.Content = game.upperValues[4];
+            labelSixesScore.Content = game.upperValues[5];
 
         }
 

@@ -126,6 +126,17 @@ namespace Yahtzee
             return score;
         }
 
+        public int chanceScore(Dice[] chanceDice)
+        {
+            int score = 0;
+            foreach (Dice d in chanceDice)
+            {
+                score += d.diceValue;
+            }
+            return score;
+        }
+
+
         public int yahtzeeScore(Dice[] calcYahtzee)
         {
             int score = new int();
