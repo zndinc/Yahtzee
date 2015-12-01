@@ -21,55 +21,44 @@ namespace Yahtzee
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dice[] diceArray = new Dice[5];
-        ScoreBoard scr = new ScoreBoard();
-        MediaPlayer soundPlayer = new MediaPlayer();
+        YahtzeeGame game = new YahtzeeGame();
 
         public MainWindow()
         {
             InitializeComponent();
-            InitGame();
-            
+            game.initDice();            
         }
 
         private void updateGUI()
         {
-            label3OfAKindScore.Content = String.Format($"{scr.threeOfAKindScore(diceArray)}");
-            label4OfAKindScore.Content = String.Format($"{scr.fourOfAKindScore(diceArray)}");
-            labelFullHouseScore.Content = String.Format($"{scr.fullHouseScore(diceArray)}");
-            labelSmallStrScore.Content = String.Format($"{scr.smallStraightScore(diceArray)}");
-            labelLrgStrScore.Content = String.Format($"{scr.largeStraightScore(diceArray)}");
-            labelYahtzeeScore.Content = String.Format($"{scr.yahtzeeScore(diceArray)}");
+            label3OfAKindScore.Content = String.Format($"{game.scr.threeOfAKindScore(game.diceArray)}");
+            label4OfAKindScore.Content = String.Format($"{game.scr.fourOfAKindScore(game.diceArray)}");
+            labelFullHouseScore.Content = String.Format($"{game.scr.fullHouseScore(game.diceArray)}");
+            labelSmallStrScore.Content = String.Format($"{game.scr.smallStraightScore(game.diceArray)}");
+            labelLrgStrScore.Content = String.Format($"{game.scr.largeStraightScore(game.diceArray)}");
+            labelYahtzeeScore.Content = String.Format($"{game.scr.yahtzeeScore(game.diceArray)}");
 
             //UpdateLabels
-            labelDie1.Content = diceArray[0].diceValue;
-            labelDie2.Content = diceArray[1].diceValue;
-            labelDie3.Content = diceArray[2].diceValue;
-            labelDie4.Content = diceArray[3].diceValue;
-            labelDie5.Content = diceArray[4].diceValue;
-            labelAcesScore.Content = scr.dieScore(diceArray, 1);
-            labelTwosScore.Content = scr.dieScore(diceArray, 2);
-            labelThreesScore.Content = scr.dieScore(diceArray, 3);
-            labelFoursScore.Content = scr.dieScore(diceArray, 4);
-            labelFivesScore.Content = scr.dieScore(diceArray, 5);
-            labelSixesScore.Content = scr.dieScore(diceArray, 6);
+            labelDie1.Content = game.diceArray[0].diceValue;
+            labelDie2.Content = game.diceArray[1].diceValue;
+            labelDie3.Content = game.diceArray[2].diceValue;
+            labelDie4.Content = game.diceArray[3].diceValue;
+            labelDie5.Content = game.diceArray[4].diceValue;
+            labelAcesScore.Content = game.scr.dieScore(game.diceArray, 1);
+            labelTwosScore.Content = game.scr.dieScore(game.diceArray, 2);
+            labelThreesScore.Content = game.scr.dieScore(game.diceArray, 3);
+            labelFoursScore.Content = game.scr.dieScore(game.diceArray, 4);
+            labelFivesScore.Content = game.scr.dieScore(game.diceArray, 5);
+            labelSixesScore.Content = game.scr.dieScore(game.diceArray, 6);
 
         }
 
-
-        private void InitGame()
-        {
-            for (int i = 0; i < diceArray.Length; i++)
-               diceArray[i] = new Dice();
-        }
 
         //Button Action to roll dice
         private void buttonRollDice_Click(object sender, RoutedEventArgs e)
         {
-            soundPlayer.Open(new Uri("diceroll.mp3", UriKind.Relative));
-            soundPlayer.Play();
-            for (int i = 0; i < diceArray.Length; i++)
-                diceArray[i].Roll();
+            game.playSound();
+            game.rollAll();
             updateGUI();
         }
 
@@ -77,8 +66,8 @@ namespace Yahtzee
         //Button Action to hold rolled dice
         private void buttonHoldDice1_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[0].ToggleDieState();
-            if (diceArray[0].holdDieState == true)
+            game.diceArray[0].ToggleDieState();
+            if (game.diceArray[0].holdDieState == true)
             {
                 labelHoldStatus1.Content = "Held";
             }
@@ -87,8 +76,8 @@ namespace Yahtzee
 
         private void buttonHoldDice2_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[1].ToggleDieState();
-            if (diceArray[1].holdDieState == true)
+            game.diceArray[1].ToggleDieState();
+            if (game.diceArray[1].holdDieState == true)
             {
                 labelHoldStatus2.Content = "Held";
             }
@@ -97,8 +86,8 @@ namespace Yahtzee
 
         private void buttonHoldDice3_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[2].ToggleDieState();
-            if (diceArray[2].holdDieState == true)
+            game.diceArray[2].ToggleDieState();
+            if (game.diceArray[2].holdDieState == true)
             {
                 labelHoldStatus3.Content = "Held";
             }
@@ -106,8 +95,8 @@ namespace Yahtzee
         }
         private void buttonHoldDice4_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[3].ToggleDieState();
-            if (diceArray[3].holdDieState == true)
+            game.diceArray[3].ToggleDieState();
+            if (game.diceArray[3].holdDieState == true)
             {
                 labelHoldStatus4.Content = "Held";
             }
@@ -116,8 +105,8 @@ namespace Yahtzee
 
         private void buttonHoldDice5_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[4].ToggleDieState();
-            if (diceArray[4].holdDieState == true)
+            game.diceArray[4].ToggleDieState();
+            if (game.diceArray[4].holdDieState == true)
             {
                 labelHoldStatus5.Content = "Held";
             }
