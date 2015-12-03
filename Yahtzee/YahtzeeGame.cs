@@ -15,10 +15,10 @@ namespace Yahtzee
         public int totalScore { get; private set; } = 0;
         public int upperScore { get; private set; } = 0;
         public int lowerScore { get; private set; } = 0;
-        public bool bonusScore { get; private set; } = false;
+        public bool bonusScore { get; private set; } = false; //Whether bonus is achieved.
 
-        public int[] upperValues { get; private set; } = new int[6] { 0, 0, 0, 0, 0, 0 };
-        public int[] lowerValues { get; private set; } = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+        public int[] upperValues { get; private set; } = new int[6] { 0, 0, 0, 0, 0, 0 }; //Stores upper values on board. 0= Ace, 1=2 2=3 3=4 4=5
+        public int[] lowerValues { get; private set; } = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 }; // Stores lower values on board. 0=Three of Kind 1=Four of Kind 2= Full House 3= Small Straight 4= Large Straight 5= Yahtzee 6= Chance 7= Yahtzee Bonus
 
         public bool[] finalUpperValues { get; private set; } = new bool[6] { false, false, false, false, false, false }; //storing locked in score values.
         public bool[] finalLowerValues { get; private set; } = new bool[7] { false, false, false, false, false, false, false };
@@ -26,8 +26,14 @@ namespace Yahtzee
         public bool yahtzeeClaimed { get; private set; } = false;
 
         public int rollNumber { get; private set; } = 0;
-        public int turnNumber { get; private set; } = 0;
-        public bool shouldUpdateLabel { get; private set; } = false;
+        public int turnNumber { get; private set; } = 0; // TODO Implement
+        public bool shouldUpdateLabel { get; private set; } = false; //Used to determine if main program should set the dice labels to "Not Held"
+
+        public bool preventButtonClick { get; private set; } = false; //Used to prevent clicking multiple scores per turn.
+
+
+        //These are done instead of allowing setters to ensure they are not altered outside of reccomended specs, and to prevent logic errors by setting to wrong value or invalid value.
+        #region variableSetters
 
         public void labelUpdated()
         {
@@ -48,10 +54,24 @@ namespace Yahtzee
         {
             finalLowerValues[index] = true;
         }
+        #endregion
+
+        public void turnEnd()
+        {
+            foreach (Dice d in diceArray)
+            {
+                d.ReleaseDieState();
+            }
+            turnNumber++;
+            rollNumber = 0;
+            shouldUpdateLabel = true;
+            //rollAll();
+            preventButtonClick = true;
+        }
 
         public void yahtzeeBonus()
         {
-            lowerValues[7] += 50;
+            lowerValues[7] += 100;
         }
 
         public void playSound()
@@ -63,20 +83,11 @@ namespace Yahtzee
         public string rollAll()
         {
             rollNumber++;
-            if (rollNumber == 3)
-            {
-                foreach (Dice d in diceArray)
-                {
-                    d.ReleaseDieState();
-                }
-                turnNumber++;
-                rollNumber = 0;
-                shouldUpdateLabel = true;
-            }
-
+            if (preventButtonClick)
+                preventButtonClick = false;
+             
             for (int i = 0; i < diceArray.Length; i++)
                 diceArray[i].Roll();
-
 
             calcUpperScore();
             calcLowerScore();
@@ -84,8 +95,8 @@ namespace Yahtzee
             calcBonusScore();
 
 
-            if (rollNumber == 2)
-                return "Roll\n(New Turn)";
+            if (rollNumber == 3)
+                return "     Roll\n(New Turn)";
             else return "Roll";
         }
 
@@ -136,6 +147,11 @@ namespace Yahtzee
                             lowerValues[6] = scr.chanceScore(diceArray);
                             break;
                         case 7:
+                            if (yahtzeeClaimed)
+                            {
+                                if (scr.chanceScore(diceArray) == 50)
+                                    lowerValues[7] += 100;
+                            }
                             break;
                         default:
                             throw new InvalidOperationException("Something went wrong inside calcLowerScore, i is out of range");

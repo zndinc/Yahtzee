@@ -26,7 +26,7 @@ namespace Yahtzee
         public MainWindow()
         {
             InitializeComponent();
-            game.initDice();            
+            game.initDice();
         }
 
         private void updateGUI()
@@ -63,13 +63,18 @@ namespace Yahtzee
         private void buttonRollDice_Click(object sender, RoutedEventArgs e)
         {
             game.playSound();
+            if (game.rollNumber == 3)
+            {
+                MessageBox.Show("You have not yet made a choice. Please choose a score category.", "Invalid Selection");
+                return;
+            }
             buttonRollDice.Content = game.rollAll();
             updateGUI();
             if (game.shouldUpdateLabel)
                 unholdLabels();
         }
 
-        
+
         //Button Action to hold rolled dice
         private void buttonHoldDice1_Click(object sender, RoutedEventArgs e)
         {
@@ -110,8 +115,13 @@ namespace Yahtzee
             if (game.diceArray[2].holdDieState == true)
             {
                 labelHoldStatus3.Content = "Held";
+                labelHoldStatus3.Foreground = Brushes.Red;
             }
-            else labelHoldStatus3.Content = "Not Held";
+            else
+            {
+                labelHoldStatus3.Content = "Not Held";
+                labelHoldStatus3.Foreground = Brushes.Black;
+            }
         }
         private void buttonHoldDice4_Click(object sender, RoutedEventArgs e)
         {
@@ -119,8 +129,13 @@ namespace Yahtzee
             if (game.diceArray[3].holdDieState == true)
             {
                 labelHoldStatus4.Content = "Held";
+                labelHoldStatus4.Foreground = Brushes.Red;
             }
-            else labelHoldStatus4.Content = "Not Held";
+            else
+            {
+                labelHoldStatus4.Content = "Not Held";
+                labelHoldStatus4.Foreground = Brushes.Black;
+            }
         }
 
         private void buttonHoldDice5_Click(object sender, RoutedEventArgs e)
@@ -129,8 +144,13 @@ namespace Yahtzee
             if (game.diceArray[4].holdDieState == true)
             {
                 labelHoldStatus5.Content = "Held";
+                labelHoldStatus5.Foreground = Brushes.Red;
             }
-            else labelHoldStatus5.Content = "Not Held";
+            else
+            {
+                labelHoldStatus5.Content = "Not Held";
+                labelHoldStatus5.Foreground = Brushes.Black;
+            }
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
@@ -140,91 +160,151 @@ namespace Yahtzee
 
         private void buttonAcesScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(0);
             buttonAcesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonTwosScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(1);
             buttonTwosScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonThreesScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(2);
             buttonThreesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonFoursScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(3);
             buttonFoursScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonFivesScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(4);
             buttonFivesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonSixesScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             game.lockUpperValue(5);
             buttonSixesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void button3OfAKindScore_Click(object sender, RoutedEventArgs e)
         {
-
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(0);
+            button3OfAKindScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void button4OfAKindScore_Click(object sender, RoutedEventArgs e)
         {
-
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(1);
+            button4OfAKindScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonFullHouseScore_Click(object sender, RoutedEventArgs e)
         {
-
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(2);
+            buttonFullHouseScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonSmallStrScore_Click(object sender, RoutedEventArgs e)
         {
-
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(3);
+            buttonSmallStrScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonLrgStrScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(4);
+            buttonLrgStrScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
 
         }
 
         private void buttonYahtzeeScore_Click(object sender, RoutedEventArgs e)
         {
+            if (game.preventButtonClick)
+                return;
             if (game.lowerValues[5] == 50)
             {
                 game.claimYahtzee();
             }
             game.lockLowerValue(5);
             buttonYahtzeeScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonChanceScore_Click(object sender, RoutedEventArgs e)
         {
-
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(6);
+            buttonChanceScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
         }
 
         private void buttonYahtzeeBonusScore_Click(object sender, RoutedEventArgs e)
         {
-            if (!game.finalLowerValues[5] == true) //check that original Yahtzee is done first.
-                MessageBox.Show("You cannot claim a Yahtzee bonus without having an original Yahtzee!", "Invalid Selection");
-            else if (game.yahtzeeClaimed == false)
-                MessageBox.Show("You cannot claim a Yahtzee bonus when you claimed a zero on Yahtzee!", "Invalid Selection");
-            else
-            {
-                game.yahtzeeBonus();
-                labelYahtzeeBonusScore.Content = game.lowerValues[7];
-            }
+            //if (!game.finalLowerValues[5] == true) //check that original Yahtzee is done first.
+            //    MessageBox.Show("You cannot claim a Yahtzee bonus without having an original Yahtzee!", "Invalid Selection");
+            //else if (game.yahtzeeClaimed == false)
+            //    MessageBox.Show("You cannot claim a Yahtzee bonus when you claimed a zero on Yahtzee!", "Invalid Selection");
+            //else
+            //{
+            //    game.yahtzeeBonus();
+            //    labelYahtzeeBonusScore.Content = game.lowerValues[7];
+            //    game.turnEnd();
+            //}
         }
 
 
