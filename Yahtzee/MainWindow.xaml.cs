@@ -39,6 +39,7 @@ namespace Yahtzee
             labelLrgStrScore.Content = game.lowerValues[4];
             labelYahtzeeScore.Content = game.lowerValues[5];
             labelChanceScore.Content = game.lowerValues[6];
+            labelYahtzeeBonusScore.Content = game.lowerValues[7];
 
             //Dice
             labelDie1.Content = game.diceArray[0].diceValue;
@@ -62,8 +63,10 @@ namespace Yahtzee
         private void buttonRollDice_Click(object sender, RoutedEventArgs e)
         {
             game.playSound();
-            game.rollAll();
+            buttonRollDice.Content = game.rollAll();
             updateGUI();
+            if (game.shouldUpdateLabel)
+                unholdLabels();
         }
 
         
@@ -74,8 +77,15 @@ namespace Yahtzee
             if (game.diceArray[0].holdDieState == true)
             {
                 labelHoldStatus1.Content = "Held";
+                labelHoldStatus1.Foreground = Brushes.Red;
+
             }
-            else labelHoldStatus1.Content = "Not Held";
+            else
+            {
+                labelHoldStatus1.Content = "Not Held";
+                labelHoldStatus1.Foreground = Brushes.Black;
+
+            }
         }
 
         private void buttonHoldDice2_Click(object sender, RoutedEventArgs e)
@@ -84,8 +94,14 @@ namespace Yahtzee
             if (game.diceArray[1].holdDieState == true)
             {
                 labelHoldStatus2.Content = "Held";
+                labelHoldStatus2.Foreground = Brushes.Red;
             }
-            else labelHoldStatus2.Content = "Not Held";
+            else
+            {
+                labelHoldStatus2.Content = "Not Held";
+                labelHoldStatus2.Foreground = Brushes.Black;
+
+            }
         }
 
         private void buttonHoldDice3_Click(object sender, RoutedEventArgs e)
@@ -120,6 +136,111 @@ namespace Yahtzee
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Yathzee, coded by Tanner Menzel, Greg Garner, and Zach Herbert.\nDice roll sound effect recorded by Mike Koenig", "About");
+        }
+
+        private void buttonAcesScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(0);
+            buttonAcesScore.IsEnabled = false;
+        }
+
+        private void buttonTwosScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(1);
+            buttonTwosScore.IsEnabled = false;
+        }
+
+        private void buttonThreesScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(2);
+            buttonThreesScore.IsEnabled = false;
+        }
+
+        private void buttonFoursScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(3);
+            buttonFoursScore.IsEnabled = false;
+        }
+
+        private void buttonFivesScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(4);
+            buttonFivesScore.IsEnabled = false;
+        }
+
+        private void buttonSixesScore_Click(object sender, RoutedEventArgs e)
+        {
+            game.lockUpperValue(5);
+            buttonSixesScore.IsEnabled = false;
+        }
+
+        private void button3OfAKindScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button4OfAKindScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonFullHouseScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonSmallStrScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonLrgStrScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonYahtzeeScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.lowerValues[5] == 50)
+            {
+                game.claimYahtzee();
+            }
+            game.lockLowerValue(5);
+            buttonYahtzeeScore.IsEnabled = false;
+        }
+
+        private void buttonChanceScore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonYahtzeeBonusScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (!game.finalLowerValues[5] == true) //check that original Yahtzee is done first.
+                MessageBox.Show("You cannot claim a Yahtzee bonus without having an original Yahtzee!", "Invalid Selection");
+            else if (game.yahtzeeClaimed == false)
+                MessageBox.Show("You cannot claim a Yahtzee bonus when you claimed a zero on Yahtzee!", "Invalid Selection");
+            else
+            {
+                game.yahtzeeBonus();
+                labelYahtzeeBonusScore.Content = game.lowerValues[7];
+            }
+        }
+
+
+        private void unholdLabels()
+        {
+            labelHoldStatus1.Content = "Not Held";
+            labelHoldStatus1.Foreground = Brushes.Black;
+            labelHoldStatus2.Content = "Not Held";
+            labelHoldStatus2.Foreground = Brushes.Black;
+            labelHoldStatus3.Content = "Not Held";
+            labelHoldStatus3.Foreground = Brushes.Black;
+            labelHoldStatus4.Content = "Not Held";
+            labelHoldStatus4.Foreground = Brushes.Black;
+            labelHoldStatus5.Content = "Not Held";
+            labelHoldStatus5.Foreground = Brushes.Black;
+            game.labelUpdated();
         }
     }
 }

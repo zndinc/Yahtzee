@@ -18,14 +18,41 @@ namespace Yahtzee
         public bool bonusScore { get; private set; } = false;
 
         public int[] upperValues { get; private set; } = new int[6] { 0, 0, 0, 0, 0, 0 };
-        public int[] lowerValues { get; private set; } = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+        public int[] lowerValues { get; private set; } = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public bool[] finalUpperValues { get; private set; } = new bool[6] { false, false, false, false, false, false }; //storing locked in score values.
         public bool[] finalLowerValues { get; private set; } = new bool[7] { false, false, false, false, false, false, false };
 
+        public bool yahtzeeClaimed { get; private set; } = false;
 
+        public int rollNumber { get; private set; } = 0;
+        public int turnNumber { get; private set; } = 0;
+        public bool shouldUpdateLabel { get; private set; } = false;
 
+        public void labelUpdated()
+        {
+            shouldUpdateLabel = false;
+        }
 
+        public void claimYahtzee()
+        {
+            yahtzeeClaimed = true;
+        }
+
+        public void lockUpperValue(int index)
+        {
+            finalUpperValues[index] = true;
+        }
+
+        public void lockLowerValue(int index)
+        {
+            finalLowerValues[index] = true;
+        }
+
+        public void yahtzeeBonus()
+        {
+            lowerValues[7] += 50;
+        }
 
         public void playSound()
         {
@@ -33,14 +60,33 @@ namespace Yahtzee
             soundPlayer.Play();
         }
 
-        public void rollAll()
+        public string rollAll()
         {
+            rollNumber++;
+            if (rollNumber == 3)
+            {
+                foreach (Dice d in diceArray)
+                {
+                    d.ReleaseDieState();
+                }
+                turnNumber++;
+                rollNumber = 0;
+                shouldUpdateLabel = true;
+            }
+
             for (int i = 0; i < diceArray.Length; i++)
                 diceArray[i].Roll();
+
+
             calcUpperScore();
             calcLowerScore();
             calcTotalScore();
             calcBonusScore();
+
+
+            if (rollNumber == 2)
+                return "Roll\n(New Turn)";
+            else return "Roll";
         }
 
         public void initDice()
@@ -89,6 +135,8 @@ namespace Yahtzee
                         case 6:
                             lowerValues[6] = scr.chanceScore(diceArray);
                             break;
+                        case 7:
+                            break;
                         default:
                             throw new InvalidOperationException("Something went wrong inside calcLowerScore, i is out of range");
                             break;
@@ -100,6 +148,7 @@ namespace Yahtzee
 
         public void calcBonusScore()
         {
+            
 
         }
 
