@@ -23,6 +23,7 @@ namespace Yahtzee
         public bool[] finalUpperValues { get; private set; } = new bool[6] { false, false, false, false, false, false }; //storing locked in score values.
         public bool[] finalLowerValues { get; private set; } = new bool[7] { false, false, false, false, false, false, false };
 
+        public bool yahtzeeBonusClaimable { get; private set; } = false;
         public bool yahtzeeClaimed { get; private set; } = false;
 
         public int rollNumber { get; private set; } = 0;
@@ -35,14 +36,19 @@ namespace Yahtzee
         //These are done instead of allowing setters to ensure they are not altered outside of reccomended specs, and to prevent logic errors by setting to wrong value or invalid value.
         #region variableSetters
 
+        public void yahtzeeAchieved()
+        {
+            yahtzeeClaimed = true;
+        }
+
         public void labelUpdated()
         {
             shouldUpdateLabel = false;
         }
 
-        public void claimYahtzee()
+        public void yahtzeeBonusAvailible()
         {
-            yahtzeeClaimed = true;
+            yahtzeeBonusClaimable = true;
         }
 
         public void lockUpperValue(int index)
@@ -65,8 +71,14 @@ namespace Yahtzee
             turnNumber++;
             rollNumber = 0;
             shouldUpdateLabel = true;
-            //rollAll();
             preventButtonClick = true;
+            if (checkGameEnd())
+                gameOver();
+        }
+
+        public void gameOver()
+        {
+            calcTotalScore();
         }
 
         public void yahtzeeBonus()
@@ -85,16 +97,13 @@ namespace Yahtzee
             rollNumber++;
             if (preventButtonClick)
                 preventButtonClick = false;
-             
+
             for (int i = 0; i < diceArray.Length; i++)
                 diceArray[i].Roll();
 
             calcUpperScore();
             calcLowerScore();
-            calcTotalScore();
             calcBonusScore();
-
-
             if (rollNumber == 3)
                 return "     Roll\n(New Turn)";
             else return "Roll";
@@ -117,60 +126,109 @@ namespace Yahtzee
             }
         }
 
+        public void calcBonusScore()
+        {
+
+        }
+
+        public void calcTotalScore()
+        {
+            foreach (int i in upperValues)
+                totalScore += i;
+            foreach (int i in lowerValues)
+                totalScore += i;
+        }
+
+        public bool checkGameEnd()
+        {
+            foreach (bool b in finalLowerValues)
+            {
+                if (b == false)
+                    return false;
+            }
+            foreach (bool c in finalUpperValues)
+            {
+                if (c == false)
+                    return false;
+            }
+            return true;
+        }
+
         public void calcLowerScore()
         {
             for (int i = 0; i < finalLowerValues.Length; i++)
             {
                 if (!finalLowerValues[i])
                 {
-                    switch(i)
+                    if (scr.yahtzeeScore(diceArray) == 50 && yahtzeeClaimed) // If joker status is achieved.
                     {
-                        case 0:
-                            lowerValues[0] = scr.threeOfAKindScore(diceArray);
-                            break;
-                        case 1:
-                            lowerValues[1] = scr.fourOfAKindScore(diceArray);
-                            break;
-                        case 2:
-                            lowerValues[2] = scr.fullHouseScore(diceArray);
-                            break;
-                        case 3:
-                            lowerValues[3] = scr.smallStraightScore(diceArray);
-                            break;
-                        case 4:
-                            lowerValues[4] = scr.largeStraightScore(diceArray);
-                            break;
-                        case 5:
-                            lowerValues[5] = scr.yahtzeeScore(diceArray);
-                            break;
-                        case 6:
-                            lowerValues[6] = scr.chanceScore(diceArray);
-                            break;
-                        case 7:
-                            if (yahtzeeClaimed)
-                            {
-                                if (scr.chanceScore(diceArray) == 50)
-                                    lowerValues[7] += 100;
-                            }
-                            break;
-                        default:
-                            throw new InvalidOperationException("Something went wrong inside calcLowerScore, i is out of range");
-                            break;
+                        switch (i)
+                        {
+                            case 0:
+                                lowerValues[0] = scr.sumOfDice(diceArray);
+                                break;
+                            case 1:
+                                lowerValues[1] = scr.sumOfDice(diceArray);
+                                break;
+                            case 2:
+                                lowerValues[2] = 25;
+                                break;
+                            case 3:
+                                lowerValues[3] = 30;
+                                break;
+                            case 4:
+                                lowerValues[4] = 40;
+                                break;
+                            case 5:
+                                throw new InvalidOperationException("It should not be possible to get a Yahtzee Joker Bonus without having claimd a Yahtzee");
+                                break;
+                            case 6:
+                                lowerValues[6] = scr.chanceScore(diceArray);
+                                break;
+                            case 7:
+                                break;
+                            default:
+                                throw new InvalidOperationException("Something went wrong inside calcLowerScore, i is out of range");
+                                break;
+                        }
+                        if (yahtzeeBonusClaimable)
+                            lowerValues[7] += 100; //Todo JOKER rules
+                    }
 
+                    else
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                lowerValues[0] = scr.threeOfAKindScore(diceArray);
+                                break;
+                            case 1:
+                                lowerValues[1] = scr.fourOfAKindScore(diceArray);
+                                break;
+                            case 2:
+                                lowerValues[2] = scr.fullHouseScore(diceArray);
+                                break;
+                            case 3:
+                                lowerValues[3] = scr.smallStraightScore(diceArray);
+                                break;
+                            case 4:
+                                lowerValues[4] = scr.largeStraightScore(diceArray);
+                                break;
+                            case 5:
+                                lowerValues[5] = scr.yahtzeeScore(diceArray);
+                                break;
+                            case 6:
+                                lowerValues[6] = scr.chanceScore(diceArray);
+                                break;
+                            case 7:
+                                break;
+                            default:
+                                throw new InvalidOperationException("Something went wrong inside calcLowerScore, i is out of range");
+                                break;
+                        }
                     }
                 }
             }
-        }
-
-        public void calcBonusScore()
-        {
-            
-
-        }
-
-        public void calcTotalScore()
-        {
-
         }
     }
 }

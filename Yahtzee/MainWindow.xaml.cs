@@ -56,6 +56,11 @@ namespace Yahtzee
             labelFivesScore.Content = game.upperValues[4];
             labelSixesScore.Content = game.upperValues[5];
 
+            if (game.totalScore != 0)
+            {
+                MessageBox.Show($"Game Over! Your final score was {game.totalScore}", "Game Over!");
+            }
+
         }
 
 
@@ -273,14 +278,16 @@ namespace Yahtzee
         {
             if (game.preventButtonClick)
                 return;
-            if (game.lowerValues[5] == 50)
-            {
-                game.claimYahtzee();
-            }
+
             game.lockLowerValue(5);
             buttonYahtzeeScore.IsEnabled = false;
             game.turnEnd();
             buttonRollDice.Content = "     Roll\n(New Turn)";
+            game.yahtzeeAchieved();
+            if (game.lowerValues[5] == 50)
+            {
+                game.yahtzeeBonusAvailible();
+            }
         }
 
         private void buttonChanceScore_Click(object sender, RoutedEventArgs e)
@@ -295,18 +302,7 @@ namespace Yahtzee
 
         private void buttonYahtzeeBonusScore_Click(object sender, RoutedEventArgs e)
         {
-            //if (!game.finalLowerValues[5] == true) //check that original Yahtzee is done first.
-            //    MessageBox.Show("You cannot claim a Yahtzee bonus without having an original Yahtzee!", "Invalid Selection");
-            //else if (game.yahtzeeClaimed == false)
-            //    MessageBox.Show("You cannot claim a Yahtzee bonus when you claimed a zero on Yahtzee!", "Invalid Selection");
-            //else
-            //{
-            //    game.yahtzeeBonus();
-            //    labelYahtzeeBonusScore.Content = game.lowerValues[7];
-            //    game.turnEnd();
-            //}
         }
-
 
         private void unholdLabels()
         {
