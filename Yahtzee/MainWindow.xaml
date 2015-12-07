@@ -86,6 +86,7 @@
             <Label x:Name="labelHoldStatus4" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
             <Label x:Name="labelHoldStatus5" Content="Not Held" Width="75" Margin="5,0,5,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5,1" Panel.ZIndex="3"/>
         </StackPanel>
+        <Image x:Name="YahtzeeImage" HorizontalAlignment="Left" Height="361" Margin="317,39,0,0" VerticalAlignment="Top" Width="119" Source="Resources/images/yahtzee.png" Stretch="Fill"/>
     </Grid>
 </Window>
 

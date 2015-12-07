@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Yahtzee
 {
@@ -22,7 +24,6 @@ namespace Yahtzee
     public partial class MainWindow : Window
     {
         YahtzeeGame game = new YahtzeeGame();
-        //string die1ImagePath = "Resources\\images\\die1.png";
 
         public MainWindow()
         {
@@ -74,6 +75,30 @@ namespace Yahtzee
             else return;
         }
 
+        private void animateDie()
+        {
+            //int[] dummyValues = new int[10] { Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7) };
+
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                for (int i = 0; i < 7; i++)
+                {
+                    this.Dispatcher.Invoke((Action)(() =>
+                    {
+                        imageDie1.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                        imageDie2.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                        imageDie3.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                        imageDie4.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                        imageDie5.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                    }));
+                    Thread.Sleep(75);
+                }
+            }).Start();
+
+        }
+
+
         private void updateGUI()
         {
             //Upper section
@@ -94,6 +119,8 @@ namespace Yahtzee
             labelChanceScore.Content = game.lowerValues[6];
 
             //Dice
+            animateDie();
+
             imageDie1.Source = new BitmapImage(new Uri(imagePath(game.diceArray[0].diceValue), UriKind.Relative));
             imageDie2.Source = new BitmapImage(new Uri(imagePath(game.diceArray[1].diceValue), UriKind.Relative));
             imageDie3.Source = new BitmapImage(new Uri(imagePath(game.diceArray[2].diceValue), UriKind.Relative));

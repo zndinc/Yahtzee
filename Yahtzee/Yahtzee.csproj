@@ -98,17 +98,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="diceroll.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\images\die1.png" />
     <Resource Include="Resources\images\die2.png" />
     <Resource Include="Resources\images\die3.png" />
     <Resource Include="Resources\images\die4.png" />
     <Resource Include="Resources\images\die5.png" />
     <Resource Include="Resources\images\die6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="diceroll.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\images\yahtzee.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

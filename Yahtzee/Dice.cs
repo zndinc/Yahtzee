@@ -21,7 +21,7 @@ namespace Yahtzee
         public bool isInitialized { get; private set; } = false; //Not on UML, added for constructor use in manually assigned dies.
         public bool holdDieState { get; private set; } = false;
         //public const int dieSides = 6; //const
-        private static readonly Random rnd = new Random();
+        public static readonly Random rnd = new Random();
 
         public Dice(int value)
         {
