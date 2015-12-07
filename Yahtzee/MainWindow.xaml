@@ -25,11 +25,18 @@
             <Button x:Name="buttonSixesScore" Content="Sixes (Total 6's)" Height="25" Click="buttonSixesScore_Click"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelDice" HorizontalAlignment="Left" Height="81" Margin="10,542,0,0" VerticalAlignment="Top" Width="438" Orientation="Horizontal">
-            <Label x:Name="labelDie1" Content="Die 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Image x:Name="imageDie1" Height="75" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,0,5,5" Panel.ZIndex="3" Source="Resources/images/die1.png" />
+            <Image x:Name="imageDie2" Height="75" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,0,5,5" Panel.ZIndex="3" Source="Resources/images/die2.png" />
+            <Image x:Name="imageDie3" Height="75" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,0,5,5" Panel.ZIndex="3" Source="Resources/images/die3.png" />
+            <Image x:Name="imageDie4" Height="75" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,0,5,5" Panel.ZIndex="3" Source="Resources/images/die4.png" />
+            <Image x:Name="imageDie5" Height="75" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="5,0,5,5" Panel.ZIndex="3" Source="Resources/images/die5.png" />
+
+
+            <!--Label x:Name="labelDie1" Content="Die 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
             <Label x:Name="labelDie2" Content="Die 2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
             <Label x:Name="labelDie3" Content="Die 3" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
             <Label x:Name="labelDie4" Content="Die 4" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
-            <Label x:Name="labelDie5" Content="Die 5" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
+            <Label x:Name="labelDie5" Content="Die 5" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/-->
         </StackPanel>
         <StackPanel x:Name="stackPanelLowerSection" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="186">
             <Button x:Name="button3OfAKindScore" Content="Three of a Kind (Total Dice)" Height="25" Click="button3OfAKindScore_Click"/>

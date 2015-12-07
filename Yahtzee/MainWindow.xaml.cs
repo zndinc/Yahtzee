@@ -22,11 +22,33 @@ namespace Yahtzee
     public partial class MainWindow : Window
     {
         YahtzeeGame game = new YahtzeeGame();
+        //string die1ImagePath = "Resources\\images\\die1.png";
 
         public MainWindow()
         {
             InitializeComponent();
             game.initDice();
+        }
+
+        private string imagePath(int dieValue)
+        {
+            switch (dieValue)
+            {
+                case 1:
+                    return "Resources\\images\\die1.png";
+                case 2:
+                    return "Resources\\images\\die2.png";
+                case 3:
+                    return "Resources\\images\\die3.png";
+                case 4:
+                    return "Resources\\images\\die4.png";
+                case 5:
+                    return "Resources\\images\\die5.png";
+                case 6:
+                    return "Resources\\images\\die6.png";
+                
+            }
+            throw new ArgumentException("Invalid integer sent to ImagePath");
         }
 
         private void updateGUI()
@@ -42,11 +64,18 @@ namespace Yahtzee
             labelYahtzeeBonusScore.Content = game.lowerValues[7];
 
             //Dice
-            labelDie1.Content = game.diceArray[0].diceValue;
-            labelDie2.Content = game.diceArray[1].diceValue;
-            labelDie3.Content = game.diceArray[2].diceValue;
-            labelDie4.Content = game.diceArray[3].diceValue;
-            labelDie5.Content = game.diceArray[4].diceValue;
+            imageDie1.Source = new BitmapImage(new Uri(imagePath(game.diceArray[0].diceValue), UriKind.Relative));
+            imageDie2.Source = new BitmapImage(new Uri(imagePath(game.diceArray[1].diceValue), UriKind.Relative));
+            imageDie3.Source = new BitmapImage(new Uri(imagePath(game.diceArray[2].diceValue), UriKind.Relative));
+            imageDie4.Source = new BitmapImage(new Uri(imagePath(game.diceArray[3].diceValue), UriKind.Relative));
+            imageDie5.Source = new BitmapImage(new Uri(imagePath(game.diceArray[4].diceValue), UriKind.Relative));
+
+            //labelDie2.Content = game.diceArray[1].diceValue;
+            //labelDie3.Content = game.diceArray[2].diceValue;
+            //labelDie4.Content = game.diceArray[3].diceValue;
+            //labelDie5.Content = game.diceArray[4].diceValue;
+
+
 
             //Upper section - TODO: Move into gamelogic
             labelAcesScore.Content = game.upperValues[0];
