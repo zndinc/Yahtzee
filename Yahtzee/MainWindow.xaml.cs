@@ -75,27 +75,25 @@ namespace Yahtzee
             else return;
         }
 
-        private void animateDie()
+        private async void animateDie()
         {
-            //int[] dummyValues = new int[10] { Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7), Dice.rnd.Next(1, 7) };
 
-            new Thread(() =>
+            for (int i = 0; i < 7; i++)
             {
-                Thread.CurrentThread.IsBackground = true;
-                for (int i = 0; i < 7; i++)
-                {
-                    this.Dispatcher.Invoke((Action)(() =>
-                    {
-                        imageDie1.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
-                        imageDie2.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
-                        imageDie3.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
-                        imageDie4.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
-                        imageDie5.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
-                    }));
-                    Thread.Sleep(75);
-                }
-            }).Start();
-
+                //Rolls dice with dummy values unless die is held
+                if (!game.diceArray[0].holdDieState) imageDie1.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                if (!game.diceArray[1].holdDieState) imageDie2.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                if (!game.diceArray[2].holdDieState) imageDie3.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                if (!game.diceArray[3].holdDieState) imageDie4.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                if (!game.diceArray[4].holdDieState) imageDie5.Source = new BitmapImage(new Uri(imagePath(Dice.rnd.Next(1, 7)), UriKind.Relative));
+                await Task.Delay(75);
+            }
+            //Set die to actual values.
+            imageDie1.Source = new BitmapImage(new Uri(imagePath(game.diceArray[0].diceValue), UriKind.Relative));
+            imageDie2.Source = new BitmapImage(new Uri(imagePath(game.diceArray[1].diceValue), UriKind.Relative));
+            imageDie3.Source = new BitmapImage(new Uri(imagePath(game.diceArray[2].diceValue), UriKind.Relative));
+            imageDie4.Source = new BitmapImage(new Uri(imagePath(game.diceArray[3].diceValue), UriKind.Relative));
+            imageDie5.Source = new BitmapImage(new Uri(imagePath(game.diceArray[4].diceValue), UriKind.Relative));
         }
 
 
@@ -121,11 +119,6 @@ namespace Yahtzee
             //Dice
             animateDie();
 
-            imageDie1.Source = new BitmapImage(new Uri(imagePath(game.diceArray[0].diceValue), UriKind.Relative));
-            imageDie2.Source = new BitmapImage(new Uri(imagePath(game.diceArray[1].diceValue), UriKind.Relative));
-            imageDie3.Source = new BitmapImage(new Uri(imagePath(game.diceArray[2].diceValue), UriKind.Relative));
-            imageDie4.Source = new BitmapImage(new Uri(imagePath(game.diceArray[3].diceValue), UriKind.Relative));
-            imageDie5.Source = new BitmapImage(new Uri(imagePath(game.diceArray[4].diceValue), UriKind.Relative));
 
         }
 
