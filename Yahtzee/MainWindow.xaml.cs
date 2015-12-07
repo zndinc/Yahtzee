@@ -51,8 +51,39 @@ namespace Yahtzee
             throw new ArgumentException("Invalid integer sent to ImagePath");
         }
 
+        private void updateScoreGUI()
+        {
+            labelUpperTotal.Content = game.calcUpperScoreTotal();
+            labelLowerTotal.Content = game.calcLowerScoreTotal();
+            if (game.bonusScore) labelUpperBonusScore.Content = 35;
+            labelTotalScore.Content = game.calcTotalScore();
+        }
+
+        private void checkGameOver()
+        {
+            if (game.checkGameEnd())
+            {
+                MessageBox.Show($"Game Over! Your final score was {game.totalScore}", "Game Over!");
+                buttonRollDice.IsEnabled = false;
+                buttonHoldDice1.IsEnabled = false;
+                buttonHoldDice2.IsEnabled = false;
+                buttonHoldDice3.IsEnabled = false;
+                buttonHoldDice4.IsEnabled = false;
+                buttonHoldDice5.IsEnabled = false;
+            }
+            else return;
+        }
+
         private void updateGUI()
         {
+            //Upper section
+            labelAcesScore.Content = game.upperValues[0];
+            labelTwosScore.Content = game.upperValues[1];
+            labelThreesScore.Content = game.upperValues[2];
+            labelFoursScore.Content = game.upperValues[3];
+            labelFivesScore.Content = game.upperValues[4];
+            labelSixesScore.Content = game.upperValues[5];
+
             //Lower section
             label3OfAKindScore.Content = game.lowerValues[0];
             label4OfAKindScore.Content = game.lowerValues[1];
@@ -61,7 +92,6 @@ namespace Yahtzee
             labelLrgStrScore.Content = game.lowerValues[4];
             labelYahtzeeScore.Content = game.lowerValues[5];
             labelChanceScore.Content = game.lowerValues[6];
-            labelYahtzeeBonusScore.Content = game.lowerValues[7];
 
             //Dice
             imageDie1.Source = new BitmapImage(new Uri(imagePath(game.diceArray[0].diceValue), UriKind.Relative));
@@ -69,26 +99,6 @@ namespace Yahtzee
             imageDie3.Source = new BitmapImage(new Uri(imagePath(game.diceArray[2].diceValue), UriKind.Relative));
             imageDie4.Source = new BitmapImage(new Uri(imagePath(game.diceArray[3].diceValue), UriKind.Relative));
             imageDie5.Source = new BitmapImage(new Uri(imagePath(game.diceArray[4].diceValue), UriKind.Relative));
-
-            //labelDie2.Content = game.diceArray[1].diceValue;
-            //labelDie3.Content = game.diceArray[2].diceValue;
-            //labelDie4.Content = game.diceArray[3].diceValue;
-            //labelDie5.Content = game.diceArray[4].diceValue;
-
-
-
-            //Upper section - TODO: Move into gamelogic
-            labelAcesScore.Content = game.upperValues[0];
-            labelTwosScore.Content = game.upperValues[1];
-            labelThreesScore.Content = game.upperValues[2];
-            labelFoursScore.Content = game.upperValues[3];
-            labelFivesScore.Content = game.upperValues[4];
-            labelSixesScore.Content = game.upperValues[5];
-
-            if (game.totalScore != 0)
-            {
-                MessageBox.Show($"Game Over! Your final score was {game.totalScore}", "Game Over!");
-            }
 
         }
 
@@ -187,6 +197,18 @@ namespace Yahtzee
             }
         }
 
+        private void clickButtonLogic(int index, bool upperOrLower) //false for upper, true for lower
+        {
+            if (upperOrLower)
+                game.lockLowerValue(index);
+            else
+                game.lockUpperValue(index);
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+            updateScoreGUI();
+            checkGameOver();
+        }
+
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Yathzee, coded by Tanner Menzel, Greg Garner, and Zach Herbert.\nDice roll sound effect recorded by Mike Koenig", "About");
@@ -196,122 +218,97 @@ namespace Yahtzee
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(0);
             buttonAcesScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(0, false);
         }
 
         private void buttonTwosScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(1);
             buttonTwosScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(1, false);
         }
 
         private void buttonThreesScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(2);
             buttonThreesScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(2, false);
         }
 
         private void buttonFoursScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(3);
             buttonFoursScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(3, false);
         }
 
         private void buttonFivesScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(4);
             buttonFivesScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(4, false);
         }
 
         private void buttonSixesScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockUpperValue(5);
             buttonSixesScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(5, false);
         }
 
         private void button3OfAKindScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(0);
             button3OfAKindScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(0, true);
         }
 
         private void button4OfAKindScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(1);
             button4OfAKindScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(1, true);
         }
 
         private void buttonFullHouseScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(2);
             buttonFullHouseScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(2, true);
         }
 
         private void buttonSmallStrScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(3);
             buttonSmallStrScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(3, true);
         }
 
         private void buttonLrgStrScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(4);
             buttonLrgStrScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
-
+            clickButtonLogic(4, true);
         }
 
         private void buttonYahtzeeScore_Click(object sender, RoutedEventArgs e)
         {
             if (game.preventButtonClick)
                 return;
-
-            game.lockLowerValue(5);
             buttonYahtzeeScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
+            clickButtonLogic(5, true);
+
             game.yahtzeeAchieved();
             if (game.lowerValues[5] == 50)
             {
@@ -323,14 +320,8 @@ namespace Yahtzee
         {
             if (game.preventButtonClick)
                 return;
-            game.lockLowerValue(6);
             buttonChanceScore.IsEnabled = false;
-            game.turnEnd();
-            buttonRollDice.Content = "     Roll\n(New Turn)";
-        }
-
-        private void buttonYahtzeeBonusScore_Click(object sender, RoutedEventArgs e)
-        {
+            clickButtonLogic(6, true);
         }
 
         private void unholdLabels()

@@ -46,27 +46,27 @@
             <Button x:Name="buttonLrgStrScore" Content="Large Straight (Score 40)" Height="25" Click="buttonLrgStrScore_Click"/>
             <Button x:Name="buttonYahtzeeScore" Content="Yahtzee (Score 50)" Height="25" Click="buttonYahtzeeScore_Click"/>
             <Button x:Name="buttonChanceScore" Content="Chance (Total Dice)" Height="25" Click="buttonChanceScore_Click"/>
-            <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25" Click="buttonYahtzeeBonusScore_Click"/>
+            <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25" IsEnabled="False"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelScores" HorizontalAlignment="Left" Height="463" Margin="211,39,0,0" VerticalAlignment="Top" Width="97">
-            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelTwosScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelThreesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelFoursScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelFivesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelSixesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelUpperTotal" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelUpperBonusScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="label3OfAKindScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="label4OfAKindScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelFullHouseScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelSmallStrScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelLrgStrScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelYahtzeeScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelChanceScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelYahtzeeBonusScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelLowerTotal" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
-            <Label x:Name="labelTotalScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelAcesScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelTwosScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelThreesScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelFoursScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelFivesScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelSixesScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelUpperTotal" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelUpperBonusScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="label3OfAKindScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="label4OfAKindScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelFullHouseScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelSmallStrScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelLrgStrScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelYahtzeeScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelChanceScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelYahtzeeBonusScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelLowerTotal" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelTotalScore" Content="0" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </StackPanel>
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top" Width="447">
             <MenuItem Header="File">
