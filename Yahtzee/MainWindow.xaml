@@ -17,12 +17,12 @@
             <StackPanel Height="100"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelUpperSection" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="186">
-            <Button x:Name="buttonAcesScore" Content="Aces (Total 1's)" Height="25"/>
-            <Button x:Name="buttonTwosScore" Content="Twos (Total 2's)" Height="25"/>
-            <Button x:Name="buttonThreesScore" Content="Threes (Total 3's)" Height="25"/>
-            <Button x:Name="buttonFoursScore" Content="Fours (Total 4's)" Height="25"/>
-            <Button x:Name="buttonFivesScore" Content="Fives (Toal 5's)" Height="25"/>
-            <Button x:Name="buttonSixesScore" Content="Sixes (Total 6's)" Height="25"/>
+            <Button x:Name="buttonAcesScore" Content="Aces (Total 1's)" Height="25" Click="buttonAcesScore_Click"/>
+            <Button x:Name="buttonTwosScore" Content="Twos (Total 2's)" Height="25" Click="buttonTwosScore_Click"/>
+            <Button x:Name="buttonThreesScore" Content="Threes (Total 3's)" Height="25" Click="buttonThreesScore_Click"/>
+            <Button x:Name="buttonFoursScore" Content="Fours (Total 4's)" Height="25" Click="buttonFoursScore_Click"/>
+            <Button x:Name="buttonFivesScore" Content="Fives (Toal 5's)" Height="25" Click="buttonFivesScore_Click"/>
+            <Button x:Name="buttonSixesScore" Content="Sixes (Total 6's)" Height="25" Click="buttonSixesScore_Click"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelDice" HorizontalAlignment="Left" Height="81" Margin="10,542,0,0" VerticalAlignment="Top" Width="438" Orientation="Horizontal">
             <Label x:Name="labelDie1" Content="Die 1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
@@ -32,17 +32,17 @@
             <Label x:Name="labelDie5" Content="Die 5" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" BorderBrush="Black" Height="75" Width="75" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5,0,5,5" Panel.ZIndex="3"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelLowerSection" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="186">
-            <Button x:Name="button3OfAKindScore" Content="Three of a Kind (Total Dice)" Height="25"/>
-            <Button x:Name="button4OfAKindScore" Content="Four of a Kind (Total Dice)" Height="25"/>
-            <Button x:Name="buttonFullHouseScore" Content="Full House (Score 25)" Height="25"/>
-            <Button x:Name="buttonSmallStrScore" Content="Small Straight (Score 30)" Height="25"/>
-            <Button x:Name="buttonLrgStrScore" Content="Large Straight (Score 40)" Height="25"/>
-            <Button x:Name="buttonYahtzeeScore" Content="Yahtzee (Score 50)" Height="25"/>
-            <Button x:Name="buttonChanceScore" Content="Chance (Total Dice)" Height="25"/>
-            <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25"/>
+            <Button x:Name="button3OfAKindScore" Content="Three of a Kind (Total Dice)" Height="25" Click="button3OfAKindScore_Click"/>
+            <Button x:Name="button4OfAKindScore" Content="Four of a Kind (Total Dice)" Height="25" Click="button4OfAKindScore_Click"/>
+            <Button x:Name="buttonFullHouseScore" Content="Full House (Score 25)" Height="25" Click="buttonFullHouseScore_Click"/>
+            <Button x:Name="buttonSmallStrScore" Content="Small Straight (Score 30)" Height="25" Click="buttonSmallStrScore_Click"/>
+            <Button x:Name="buttonLrgStrScore" Content="Large Straight (Score 40)" Height="25" Click="buttonLrgStrScore_Click"/>
+            <Button x:Name="buttonYahtzeeScore" Content="Yahtzee (Score 50)" Height="25" Click="buttonYahtzeeScore_Click"/>
+            <Button x:Name="buttonChanceScore" Content="Chance (Total Dice)" Height="25" Click="buttonChanceScore_Click"/>
+            <Button x:Name="buttonYahtzeeBonusScore" Content="Yahtzee Bonus (Score 100)" Height="25" Click="buttonYahtzeeBonusScore_Click"/>
         </StackPanel>
         <StackPanel x:Name="stackPanelScores" HorizontalAlignment="Left" Height="463" Margin="211,39,0,0" VerticalAlignment="Top" Width="97">
-            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelAcesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelTwosScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelThreesScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>
             <Label x:Name="labelFoursScore" Content="" Height="25" Background="White" BorderThickness="1" BorderBrush="Black"/>

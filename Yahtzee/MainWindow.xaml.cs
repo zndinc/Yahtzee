@@ -21,106 +21,302 @@ namespace Yahtzee
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dice[] diceArray = new Dice[5];
-        ScoreBoard scr = new ScoreBoard();
-        MediaPlayer soundPlayer = new MediaPlayer();
+        YahtzeeGame game = new YahtzeeGame();
 
         public MainWindow()
         {
             InitializeComponent();
-            InitGame();
-            
+            game.initDice();
         }
 
         private void updateGUI()
         {
-            //Need to set up calculations for the upper section
-            label3OfAKindScore.Content = String.Format($"{scr.threeOfAKindScore(diceArray)}");
-            label4OfAKindScore.Content = String.Format($"{scr.fourOfAKindScore(diceArray)}");
-            labelFullHouseScore.Content = String.Format($"{scr.fullHouseScore(diceArray)}");
-            labelSmallStrScore.Content = String.Format($"{scr.smallStraightScore(diceArray)}");
-            labelLrgStrScore.Content = String.Format($"{scr.largeStraightScore(diceArray)}");
-            labelYahtzeeScore.Content = String.Format($"{scr.yahtzeeScore(diceArray)}");
+            //Lower section
+            label3OfAKindScore.Content = game.lowerValues[0];
+            label4OfAKindScore.Content = game.lowerValues[1];
+            labelFullHouseScore.Content = game.lowerValues[2];
+            labelSmallStrScore.Content = game.lowerValues[3];
+            labelLrgStrScore.Content = game.lowerValues[4];
+            labelYahtzeeScore.Content = game.lowerValues[5];
+            labelChanceScore.Content = game.lowerValues[6];
+            labelYahtzeeBonusScore.Content = game.lowerValues[7];
 
-            //UpdateLabels
-            labelDie1.Content = diceArray[0].diceValue;
-            labelDie2.Content = diceArray[1].diceValue;
-            labelDie3.Content = diceArray[2].diceValue;
-            labelDie4.Content = diceArray[3].diceValue;
-            labelDie5.Content = diceArray[4].diceValue;
+            //Dice
+            labelDie1.Content = game.diceArray[0].diceValue;
+            labelDie2.Content = game.diceArray[1].diceValue;
+            labelDie3.Content = game.diceArray[2].diceValue;
+            labelDie4.Content = game.diceArray[3].diceValue;
+            labelDie5.Content = game.diceArray[4].diceValue;
+
+            //Upper section - TODO: Move into gamelogic
+            labelAcesScore.Content = game.upperValues[0];
+            labelTwosScore.Content = game.upperValues[1];
+            labelThreesScore.Content = game.upperValues[2];
+            labelFoursScore.Content = game.upperValues[3];
+            labelFivesScore.Content = game.upperValues[4];
+            labelSixesScore.Content = game.upperValues[5];
+
+            if (game.totalScore != 0)
+            {
+                MessageBox.Show($"Game Over! Your final score was {game.totalScore}", "Game Over!");
+            }
+
         }
 
-
-        private void InitGame()
-        {
-            for (int i = 0; i < diceArray.Length; i++)
-               diceArray[i] = new Dice();
-        }
 
         //Button Action to roll dice
         private void buttonRollDice_Click(object sender, RoutedEventArgs e)
         {
-            soundPlayer.Open(new Uri("diceroll.mp3", UriKind.Relative));
-            soundPlayer.Play();
-            for (int i = 0; i < diceArray.Length; i++)
-                diceArray[i].Roll();
+            game.playSound();
+            if (game.rollNumber == 3)
+            {
+                MessageBox.Show("You have not yet made a choice. Please choose a score category.", "Invalid Selection");
+                return;
+            }
+            buttonRollDice.Content = game.rollAll();
             updateGUI();
+            if (game.shouldUpdateLabel)
+                unholdLabels();
         }
 
-        
+
         //Button Action to hold rolled dice
         private void buttonHoldDice1_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[0].ToggleDieState();
-            if (diceArray[0].holdDieState == true)
+            game.diceArray[0].ToggleDieState();
+            if (game.diceArray[0].holdDieState == true)
             {
                 labelHoldStatus1.Content = "Held";
+                labelHoldStatus1.Foreground = Brushes.Red;
+
             }
-            else labelHoldStatus1.Content = "Not Held";
+            else
+            {
+                labelHoldStatus1.Content = "Not Held";
+                labelHoldStatus1.Foreground = Brushes.Black;
+
+            }
         }
 
         private void buttonHoldDice2_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[1].ToggleDieState();
-            if (diceArray[1].holdDieState == true)
+            game.diceArray[1].ToggleDieState();
+            if (game.diceArray[1].holdDieState == true)
             {
                 labelHoldStatus2.Content = "Held";
+                labelHoldStatus2.Foreground = Brushes.Red;
             }
-            else labelHoldStatus2.Content = "Not Held";
+            else
+            {
+                labelHoldStatus2.Content = "Not Held";
+                labelHoldStatus2.Foreground = Brushes.Black;
+
+            }
         }
 
         private void buttonHoldDice3_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[2].ToggleDieState();
-            if (diceArray[2].holdDieState == true)
+            game.diceArray[2].ToggleDieState();
+            if (game.diceArray[2].holdDieState == true)
             {
                 labelHoldStatus3.Content = "Held";
+                labelHoldStatus3.Foreground = Brushes.Red;
             }
-            else labelHoldStatus3.Content = "Not Held";
+            else
+            {
+                labelHoldStatus3.Content = "Not Held";
+                labelHoldStatus3.Foreground = Brushes.Black;
+            }
         }
         private void buttonHoldDice4_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[3].ToggleDieState();
-            if (diceArray[3].holdDieState == true)
+            game.diceArray[3].ToggleDieState();
+            if (game.diceArray[3].holdDieState == true)
             {
                 labelHoldStatus4.Content = "Held";
+                labelHoldStatus4.Foreground = Brushes.Red;
             }
-            else labelHoldStatus4.Content = "Not Held";
+            else
+            {
+                labelHoldStatus4.Content = "Not Held";
+                labelHoldStatus4.Foreground = Brushes.Black;
+            }
         }
 
         private void buttonHoldDice5_Click(object sender, RoutedEventArgs e)
         {
-            diceArray[4].ToggleDieState();
-            if (diceArray[4].holdDieState == true)
+            game.diceArray[4].ToggleDieState();
+            if (game.diceArray[4].holdDieState == true)
             {
                 labelHoldStatus5.Content = "Held";
+                labelHoldStatus5.Foreground = Brushes.Red;
             }
-            else labelHoldStatus5.Content = "Not Held";
+            else
+            {
+                labelHoldStatus5.Content = "Not Held";
+                labelHoldStatus5.Foreground = Brushes.Black;
+            }
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Yathzee, coded by Tanner Menzel, Greg Garner, and Zach Herbert.\nDice roll sound effect recorded by Mike Koenig", "About");
+        }
+
+        private void buttonAcesScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(0);
+            buttonAcesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonTwosScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(1);
+            buttonTwosScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonThreesScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(2);
+            buttonThreesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonFoursScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(3);
+            buttonFoursScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonFivesScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(4);
+            buttonFivesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonSixesScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockUpperValue(5);
+            buttonSixesScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void button3OfAKindScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(0);
+            button3OfAKindScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void button4OfAKindScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(1);
+            button4OfAKindScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonFullHouseScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(2);
+            buttonFullHouseScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonSmallStrScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(3);
+            buttonSmallStrScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonLrgStrScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(4);
+            buttonLrgStrScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+
+        }
+
+        private void buttonYahtzeeScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+
+            game.lockLowerValue(5);
+            buttonYahtzeeScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+            game.yahtzeeAchieved();
+            if (game.lowerValues[5] == 50)
+            {
+                game.yahtzeeBonusAvailible();
+            }
+        }
+
+        private void buttonChanceScore_Click(object sender, RoutedEventArgs e)
+        {
+            if (game.preventButtonClick)
+                return;
+            game.lockLowerValue(6);
+            buttonChanceScore.IsEnabled = false;
+            game.turnEnd();
+            buttonRollDice.Content = "     Roll\n(New Turn)";
+        }
+
+        private void buttonYahtzeeBonusScore_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void unholdLabels()
+        {
+            labelHoldStatus1.Content = "Not Held";
+            labelHoldStatus1.Foreground = Brushes.Black;
+            labelHoldStatus2.Content = "Not Held";
+            labelHoldStatus2.Foreground = Brushes.Black;
+            labelHoldStatus3.Content = "Not Held";
+            labelHoldStatus3.Foreground = Brushes.Black;
+            labelHoldStatus4.Content = "Not Held";
+            labelHoldStatus4.Foreground = Brushes.Black;
+            labelHoldStatus5.Content = "Not Held";
+            labelHoldStatus5.Foreground = Brushes.Black;
+            game.labelUpdated();
         }
     }
 }
